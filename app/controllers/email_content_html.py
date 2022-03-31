@@ -1,88 +1,108 @@
 
 HTML = """
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600;700&family=Lilita+One&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Verification - Follow Events</title>
-    <style type="text/css">
-      body{
-        align-content: center;
-        align-items: center;
-        background: #FFFFFF;
-        border-radius: 10px;
-        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        font-family: 'Inter', sans-serif;
-        height: max-content;
-        justify-content: space-evenly;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 30px;
-        max-width: 850px;
-        padding: 30px;
-      }
-      h2{
-        font-family: 'Lilita One', cursive; 
-        font-weight: normal;
-      }
-      img{
-        width: 120px;
-      }
-      p, h2{
-        margin: 15px;
-      }
-      #code{
-        color: #514BF2;
-        font-size: 3.5rem;
-        font-family: 'Lilita One', cursive; 
-      }
-      .main-content__text{
-        display: flex;
-        flex-direction: column;
-        font-size: 1.2rem;
-        justify-content: space-evenly;
-        line-height: 32px;
-      }
-      
-      .regards p {  
-        margin: 0 15px;
-      }
-      footer{
-        align-self: flex-start;      
-        font-size: 10px;
-        width: 100%;
-      }
-    </style>
+    <style type="text/css"></style>
   </head>
-  <body>
-    <img
-      src="https://i.ibb.co/ctKDHyW/follow-events-logo.png"
-      alt="Follow Events - Logo"
-    />
-    <main>
-      <h2>Código de acesso:</h2>
-      <p id="code">1234</p>
-      <div class="main-content__text">
-        <p>Olá, [user]!</p>
-        <p>
-          Por favor, volte para a página de alteração de senha e coloque o código
-          acima para verificar a sua identidade.
-        </p>
-      <div class='regards'>
-        <p>Sinceramente,</p>
-        <p>Time do Follow Events</p>
-      </div>
-      </div>
-    </main>
-    <footer>
-      <p>Esse email é enviado automaticamente e não precisa receber respostas.</p>
-      <p>Precisa de ajuda? Nos contate através do email followevents.corp@gmail.com</a></p>
-    </footer>
+​
+  <body style="margin: 0; padding: 0">
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="450"
+      style="border: 1px solid #f5f5f5; margin-top: 30px"
+    >
+      <tr>
+        <td align="center" bgcolor="#ffffff" style="padding: 40px 0 30px 0">
+          <img
+            src="https://i.ibb.co/ctKDHyW/follow-events-logo.png"
+            alt="Follow Events"
+            width="230"
+            style="display: block"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <td
+              style="
+                color: #153643;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                  'Helvetica Neue', sans-serif;
+                font-size: 16px;
+              "
+            >
+              Código de acesso:
+            </td>
+            <tr>
+              <td width="260" valign="top">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td
+                      style="
+                        color: #514bf2;
+                        font-family: -apple-system, BlinkMacSystemFont,
+                          'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+                          'Open Sans', 'Helvetica Neue', sans-serif;
+                        font-size: 45px;
+                        line-height: 20px;
+                      "
+                      height="100px"
+                    >
+                      <b>{code}</b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style="
+                        padding: 10px 0 0 0;
+                        color: #153643;
+                        font-family: -apple-system, BlinkMacSystemFont,
+                          'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+                          'Open Sans', 'Helvetica Neue', sans-serif;
+                        font-size: 16px;
+                        line-height: 24px;
+                      "
+                    >
+                      Por favor, volte para a página de alteração de senha e
+                      coloque o código acima para verificar a sua identidade.
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#1DA8FF" style="padding: 20px 30px">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td
+                style="
+                  color: #ffffff;
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                    'Helvetica Neue', sans-serif;
+                  font-size: 10px;
+                  line-height: 15px;
+                "
+              >
+                &reg; Follow Events 2022<br />
+                Precisa de ajuda? Nos contate followevents.corp@gmail.com
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
 """

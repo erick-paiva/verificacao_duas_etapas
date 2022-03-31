@@ -1,6 +1,6 @@
 import psycopg2
 import os
-
+from psycopg2 import extras
 
 configs = {
     "host": os.getenv("DB_HOST"),
@@ -11,13 +11,21 @@ configs = {
 
 
 class DatabaseConnector:
+    # @classmethod
+    # def get_conn_cur(cls):
+    #     cls.conn = psycopg2.connect(**configs)
+    #     cls.cur = cls.conn.cursor()
+        
     @classmethod
     def get_conn_cur(cls):
         cls.conn = psycopg2.connect(**configs)
-        cls.cur = cls.conn.cursor()
+        cls.cur = cls.conn.cursor(cursor_factory=extras.RealDictCursor)
+
 
     @classmethod
     def commit_and_close(cls):
         cls.conn.commit()
         cls.cur.close()
         cls.conn.close()
+        
+    

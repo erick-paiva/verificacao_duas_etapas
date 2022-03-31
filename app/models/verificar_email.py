@@ -1,8 +1,9 @@
 from app.models import DatabaseConnector
 from psycopg2 import sql
 
+
 class Email(DatabaseConnector):
-    
+
     def __init__(self, code: int, email: str) -> None:
         self.code = code
         self.email = email
@@ -12,17 +13,16 @@ class Email(DatabaseConnector):
         self.get_conn_cur()
         query = """
             create table if not exists emails_para_verificar(
-                code INTEGER NOT NULL,
-                email VARCHAR(100) NOT NULL unique
+                code        INTEGER         NOT NULL,
+                email       VARCHAR(100)    NOT NULL unique,
+                tentativas  INTEGER         DEFAULT 3
             )
         """
         self.cur.execute(query)
 
         self.commit_and_close()
-        
-    
+
     def create_user(self):
-        # self.create_table_if_not_exits()
 
         self.get_conn_cur()
 
@@ -43,28 +43,26 @@ class Email(DatabaseConnector):
         self.commit_and_close()
 
         return user_inserido
-    
-    
+
+    # @classmethod
+    # def serialize(cls, data: tuple):
+    #     return dict(zip(cls.series_columns, data))
+
     @classmethod
-    def serialize(cls, data: tuple):
-        return dict(zip(cls.series_columns, data))
-    
-    @classmethod
-    def obter_um_codigo_por_email(self, email = None):
-        # self.create_table_if_not_exits()
+    def obter_codigo_ou_tentativas_por_email(self, email, payload: list = ["code"]):
         self.get_conn_cur()
-        if email:
 
-            email_user = sql.Literal(email)
-            
-            query = sql.SQL("""
-                SELECT code FROM emails_para_verificar WHERE email = {email};
-            """).format(email=email_user)
+        columns = [sql.Identifier(key) for key in payload]
 
-        # else:
-        #     query = """
-        #         SELECT * FROM emails_para_verificar;
-        #     """
+
+        email_user = sql.Literal(email)
+
+        query = sql.SQL("""
+            SELECT {columns} FROM emails_para_verificar WHERE email = {email};
+        """).format(
+            email=email_user,
+            columns=sql.SQL(",").join(columns)
+        )
 
         self.cur.execute(query)
 
@@ -72,35 +70,36 @@ class Email(DatabaseConnector):
 
         self.commit_and_close()
         if codigo_do_email:
-            return codigo_do_email[0]
+            return dict(codigo_do_email)
 
         return codigo_do_email
-    
+
     @classmethod
-    def atualizar_code_por_email(self, email: str ,code: int):
+    def atualizar_code_por_email(self, email: str, payload: dict):
         self.get_conn_cur()
-        
+
+        columns = [sql.Identifier(key) for key in payload.keys()]
+        values = [sql.Literal(value) for value in payload.values()]
         email_update_code = sql.Literal(email)
-        values = sql.Literal(code)
+        # values = sql.Literal(code)
 
         query = sql.SQL(
             """
             UPDATE
                 emails_para_verificar
             SET
-                (code) = ROW({values})
+                ({columns}) = ROW({values})
             WHERE
                 email = {email}
             RETURNING *;
             """
         ).format(
-            email=email_update_code,
-            values=values,
+            columns=sql.SQL(",").join(columns),
+            values=sql.SQL(",").join(values),
+            email=email_update_code
         )
 
-
         self.cur.execute(query)
-        
+
         self.commit_and_close()
-        return code    
-    
+        # return code

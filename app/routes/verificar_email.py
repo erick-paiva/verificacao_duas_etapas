@@ -1,7 +1,8 @@
 from flask import Blueprint
-from app.controllers.verificar_email import verificar_email
+from app.controllers.verificar_email import cadastrar_email, verificar_email
 
-bp_email = Blueprint("email", __name__, url_prefix="/email")
+bp_email = Blueprint("email", __name__, url_prefix="")
 
 
-bp_email.post("")(verificar_email)
+bp_email.post("/email")(verificar_email)
+bp_email.post("/register")(cadastrar_email)
