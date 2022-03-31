@@ -1,0 +1,1 @@
+from .series import add_serie, obter_uma_serie , obter_todas_series
